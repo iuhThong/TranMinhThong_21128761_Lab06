@@ -13,21 +13,19 @@ import Icon from 'react-native-vector-icons/Ionicons';
 export default function LoginScreen({ navigation }) {
   const [email, setEmail]= useState('')
   const [pwd, setPwd]= useState('')
-  const handleLogin= async()=>{
+  const handleLogin= async () => {
     try {
       const respone= await fetch('https://6723584e493fac3cf24a8fe9.mockapi.io/Account')
       const users= await respone.json()
 
-      const user= users.find((user)=> user.Email === email && user.Pwd=== pwd)
-      if(user){
-        console.log("dang nhap thanh cong")
+      const user= users.find((user)=> user.Email === email && user.Pwd == pwd)
+      if (user) {
         navigation.navigate('ElectronicsScreen')
-      }
-      else{
-      Alert.alert('Invalid')
+      } else {
+        Alert.alert('Log in failed')
       }
     } catch (error) {
-      Alert.alert('Error: '+ error)
+        console.error('error', error)
     }
   }
   return (
